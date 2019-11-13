@@ -701,7 +701,7 @@ msgstr "Файл %1$s вже існує на один рівень вище Word
 msgid "The file %1$s already exists. If you need to reset any of the configuration items in this file, please delete it first. You may try <a href=\"%2$s\">installing now</a>."
 msgstr "Файл %1$s вже існує. Якщо вам потрібно скинути котрийсь із параметрів у цьому файлі, будь ласка, спочатку видаліть його. Ви можете спробувати <a href=\"%2$s\">встановити зараз</a>."
 
-#. translators: %s: wp-config-sample.php
+#. translators: %s: wp-config.php
 #: wp-admin/setup-config.php:52
 msgid "Sorry, I need a %s file to work from. Please re-upload this file to your WordPress installation."
 msgstr "Для роботи потрібен файл %s. Будь ласка, завантажте цей файл до свого встановлення WordPress."
