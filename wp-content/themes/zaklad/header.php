@@ -73,17 +73,7 @@ $post_slug=$post->post_name;
         </div>
         <nav class="nav header__nav <?= is_page_template('page-index.php') ? 'no-bottom-border' : '' ?>">
             <div class="container nav__container">
-                <ul>
-                    <li><a href="/">Головна</a></li>
-                    <li><a href="/about.html">Про нас</a></li>
-                    <li><a href="/activity.html">Діяльність</a></li>
-                    <li><a href="/profession.html">Професії</a></li>
-                    <li><a href="/publications.html">Публікації</a></li>
-                    <li><a href="/career-guidance.html">Профорієнтація</a></li>
-                    <li><a href="/reviews.html">Відгуки</a></li>
-                    <li><a href="/faq.html">FAQ</a></li>
-                    <li><a href="/contacts.html">Контакти</a></li>
-                </ul>
+                <?php wp_nav_menu('head-menu') ?>
             </div>
         </nav>
         <?php if (!is_page_template('page-index.php')): ?>
@@ -91,8 +81,40 @@ $post_slug=$post->post_name;
                 <div class="container">
                     <ul>
                         <li><a href="/">Головна</a></li>
-                        <li><span>Про нас</span>
+                        <?php if ( is_page_template('page-about.php') ): ?>
+                        <li>
+                            <span>Про нас</span>
                         </li>
+                        <?php endif; ?>
+                        <?php if ( is_page_template('page-profession.php') ): ?>
+                            <li>
+                                <span>Діяльність</span>
+                            </li>
+                        <?php endif; ?>
+                        <?php if ( $post->post_type == 'profession' ) : ?>
+                        <li>
+                            <a href="<?= get_page_link( 103 ); ?>">Про нас</a>
+                        </li>
+                        <li>
+                            <span><?= the_title() ?></span>
+                        </li>
+                        <?php endif; ?>
+                        <?php if ( $post->post_type == 'current_profession' ) : ?>
+                            <li>
+                                <a href="<?= get_page_link( 112 ); ?>">Діяльність</a>
+                            </li>
+                            <li>
+                                <span><?= the_title() ?></span>
+                            </li>
+                        <?php endif; ?>
+                        <?php if ( $post->post_type == 'partners' ) : ?>
+                            <li>
+                                <a href="<?= get_page_link( 85 ); ?>">Про нас</a>
+                            </li>
+                            <li>
+                                <span><?= the_title() ?></span>
+                            </li>
+                        <?php endif; ?>
                     </ul>
                 </div>
             </div>
@@ -109,17 +131,7 @@ $post_slug=$post->post_name;
                     </div>
                 </div>
                 <nav class="mobile-nav__nav">
-                    <ul>
-                        <li><a href="/">Головна</a></li>
-                        <li><a href="/about.html">Про нас</a></li>
-                        <li><a href="/activity.html">Діяльність</a></li>
-                        <li><a href="/profession.html">Професії</a></li>
-                        <li><a href="/publications.html">Публікації</a></li>
-                        <li><a href="/career-guidance.html">Профорієнтація</a></li>
-                        <li><a href="/reviews.html">Відгуки</a></li>
-                        <li><a href="/faq.html">FAQ</a></li>
-                        <li><a href="/contacts.html">Контакти </a></li>
-                    </ul>
+                    <?php wp_nav_menu('head-menu') ?>
                 </nav>
             </div>
         </div>

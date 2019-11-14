@@ -9,7 +9,15 @@
 
 ?>
 
-<section class="last-news section__bg_snow">
+<?php
+    if (is_page_template('page-index.php')) {
+        $bg_color_class = 'section__bg_snow';
+    } else {
+        $bg_color_class = 'white-bg';
+    }
+?>
+
+<section class="last-news <?= $bg_color_class ?>">
     <div class="container">
         <h2>Останні новини</h2>
         <div class="last-news__row">
