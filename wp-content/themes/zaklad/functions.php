@@ -122,13 +122,22 @@ add_action( 'widgets_init', 'zaklad_widgets_init' );
 function zaklad_scripts() {
 	wp_enqueue_style( 'zaklad-style', get_stylesheet_uri() );
 
-	wp_enqueue_script( 'zaklad-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
+    //  Actual jQuery ver.
+    if (!is_admin()) {
+        wp_deregister_script('jquery');
+        wp_register_script(
+            'jquery',
+            get_template_directory_uri() . '/js/jquery-3.3.1.min.js',
+            false,
+            '3.3.1');
+        wp_enqueue_script('jquery');
+    }
 
-	wp_enqueue_script( 'zaklad-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
-
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
-	}
+    wp_enqueue_script( 'swiper', get_template_directory_uri() . '/js/swiper.min.js', array(), '20151215', true );
+    wp_enqueue_script( 'lightgallery', get_template_directory_uri() . '/js/lightgallery.min.js', array(), '20151215', true );
+    wp_enqueue_script( 'lg-thumbnail', get_template_directory_uri() . '/js/lg-thumbnail.min.js', array(), '20151215', true );
+    wp_enqueue_script( 'lg-fullscreen', get_template_directory_uri() . '/js/lg-fullscreen.min.js', array(), '20151215', true );
+    wp_enqueue_script( 'main', get_template_directory_uri() . '/js/main.js', array(), '20151215', true );
 }
 add_action( 'wp_enqueue_scripts', 'zaklad_scripts' );
 
@@ -159,3 +168,5 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+// Disable admin menu
+add_filter('show_admin_bar', '__return_false');

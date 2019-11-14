@@ -9,50 +9,119 @@
  * @package zaklad
  */
 
+global $post;
+$post_slug=$post->post_name;
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
-	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="profile" href="https://gmpg.org/xfn/11">
-
-	<?php wp_head(); ?>
+    <meta charset="<?php bloginfo( 'charset' ); ?>">
+    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE = edge"><![endif]-->
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="https://cdn.rawgit.com/sachinchoolur/lightgallery.js/master/dist/css/lightgallery.css" rel="stylesheet">
+    <?php wp_head(); ?>
+    <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script><![endif]-->
 </head>
-
-<body <?php body_class(); ?>>
-<div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'zaklad' ); ?></a>
-
-	<header id="masthead" class="site-header">
-		<div class="site-branding">
-			<?php
-			the_custom_logo();
-			if ( is_front_page() && is_home() ) :
-				?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-				<?php
-			else :
-				?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-				<?php
-			endif;
-			$zaklad_description = get_bloginfo( 'description', 'display' );
-			if ( $zaklad_description || is_customize_preview() ) :
-				?>
-				<p class="site-description"><?php echo $zaklad_description; /* WPCS: xss ok. */ ?></p>
-			<?php endif; ?>
-		</div><!-- .site-branding -->
-
-		<nav id="site-navigation" class="main-navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'zaklad' ); ?></button>
-			<?php
-			wp_nav_menu( array(
-				'theme_location' => 'menu-1',
-				'menu_id'        => 'primary-menu',
-			) );
-			?>
-		</nav><!-- #site-navigation -->
-	</header><!-- #masthead -->
-
-	<div id="content" class="site-content">
+<body>
+<div class="wrapper">
+    <header class="header">
+        <div class="container header__container">
+            <div class="header__row">
+                <div class="header__contacts">
+                    <div class="header__mail-and-social mail-and-social">
+                        <div class="mail-and-social__row mail-and-social__mail-row"><a class="mail-and-social__mail-link" href="mailto://ioannos74@gmail.com"><img src="<?php bloginfo('template_url'); ?>/images/icons/mail.png" alt="Лист до одеський державний центр професійного навчання працівників переробної промисловості"><span>ioannos74@gmail.com</span></a></div>
+                        <div class="mail-and-social__row mail-and-social__social-row"><a class="mail-and-social__social-link" href="/"><img src="<?php bloginfo('template_url'); ?>/images/icons/instagram.png" alt="Instagram"></a><a class="mail-and-social__social-link" href="/"><img src="<?php bloginfo('template_url'); ?>/images/icons/facebook.png" alt="Facebook"></a><a class="mail-and-social__social-link" href="/"><img src="<?php bloginfo('template_url'); ?>/images/icons/youtube.png" alt="Youtube"></a><a class="mail-and-social__social-link" href="/"><img src="<?php bloginfo('template_url'); ?>/images/icons/viber.png" alt="Viber"></a><a class="mail-and-social__social-link" href="/"><img src="<?php bloginfo('template_url'); ?>/images/icons/telegram.png" alt="Telegram"></a><a class="mail-and-social__social-link" href="/"><img src="<?php bloginfo('template_url'); ?>/images/icons/whatsapp.png" alt="Whatsapp"></a></div>
+                    </div>
+                    <div class="header__phones phones">
+                        <div class="phones__icon-wr"><img src="<?php bloginfo('template_url'); ?>/images/icons/phone.png" alt="Зателефонувати до одеський державний центр професійного навчання працівників переробної промисловості"></div>
+                        <div class="phones__phones-list">
+                            <ul>
+                                <?php
+                                    $args = array(
+                                        'post_type' => 'phone_numbers',
+                                        'post_status' => 'publish',
+                                        'posts_per_page' => -1,
+                                        'orderby' => 'modified',
+                                        'order' => 'ASC',
+                                    );
+                                    $loop = new WP_Query($args);
+                                    while ($loop->have_posts()) : $loop->the_post();
+                                ?>
+                                    <li><a class="phones__phone-link" href="tel://<?= the_field('phone_number_for_link', $post->ID) ?>"><?= the_field('phone_number_for_display', $post->ID) ?></a></li>
+                                <?php
+                                    endwhile;
+                                    wp_reset_postdata();
+                                ?>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="header__logo"><a class="header__logo-link" href="/"><img src="<?php bloginfo('template_url'); ?>/images/logo.png" alt="державний центр професійного навчання працівників переробної промисловості"></a></div>
+                <div class="header__buttons">
+                    <div class="header__buttons-item">
+                        <button class="btn btn__color_blue" type="button" data-type="modal" data-modal="request">Онлайн запис</button>
+                    </div>
+                    <div class="header__buttons-item">
+                        <button class="btn btn__color_yellow" type="button" data-type="modal" data-modal="callback">Замовити дзвінок</button>
+                    </div>
+                </div>
+            </div>
+            <div class="header__row header__title-row">
+                <h1>Одеський державний центр професійного навчання працівників переробної промисловості</h1>
+            </div>
+            <div class="header__hamburger hamburger" id="hamburger"><span></span></div>
+        </div>
+        <nav class="nav header__nav <?= is_page_template('page-index.php') ? 'no-bottom-border' : '' ?>">
+            <div class="container nav__container">
+                <ul>
+                    <li><a href="/">Головна</a></li>
+                    <li><a href="/about.html">Про нас</a></li>
+                    <li><a href="/activity.html">Діяльність</a></li>
+                    <li><a href="/profession.html">Професії</a></li>
+                    <li><a href="/publications.html">Публікації</a></li>
+                    <li><a href="/career-guidance.html">Профорієнтація</a></li>
+                    <li><a href="/reviews.html">Відгуки</a></li>
+                    <li><a href="/faq.html">FAQ</a></li>
+                    <li><a href="/contacts.html">Контакти</a></li>
+                </ul>
+            </div>
+        </nav>
+        <?php if (!is_page_template('page-index.php')): ?>
+            <div class="header__breadcrumbs breadcrumbs">
+                <div class="container">
+                    <ul>
+                        <li><a href="/">Головна</a></li>
+                        <li><span>Про нас</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        <?php endif; ?>
+        <div class="mobile-nav header__mobile-nav">
+            <div class="mobile-nav__close"><img src="<?php bloginfo('template_url'); ?>/images/icons/close.png" alt="close popup"></div>
+            <div class="container mobile-nav__container">
+                <div class="mobile-nav__buttons">
+                    <div class="mobile-nav__buttons-item">
+                        <button class="btn btn__color_blue" type="button" data-type="modal" data-modal="request">Онлайн запис</button>
+                    </div>
+                    <div class="mobile-nav__buttons-item">
+                        <button class="btn btn__color_yellow" type="button" data-type="modal" data-modal="callback">Замовити дзвінок</button>
+                    </div>
+                </div>
+                <nav class="mobile-nav__nav">
+                    <ul>
+                        <li><a href="/">Головна</a></li>
+                        <li><a href="/about.html">Про нас</a></li>
+                        <li><a href="/activity.html">Діяльність</a></li>
+                        <li><a href="/profession.html">Професії</a></li>
+                        <li><a href="/publications.html">Публікації</a></li>
+                        <li><a href="/career-guidance.html">Профорієнтація</a></li>
+                        <li><a href="/reviews.html">Відгуки</a></li>
+                        <li><a href="/faq.html">FAQ</a></li>
+                        <li><a href="/contacts.html">Контакти </a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <main class="content">
